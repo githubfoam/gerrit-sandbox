@@ -25,8 +25,6 @@ matrix:
         - docker build -t gerrit:local . --file Dockerfile.openfrontier
         - docker image ls 
         - docker run -d -p 8080:8080 -p 29418:29418 gerrit:local
-        # curl: (56) Recv failure: Connection reset by peer
-        # - curl  http://localhost:8080
       after_success:
         - deactivate
 
@@ -47,8 +45,6 @@ matrix:
         - docker build -t gerrit:local . --file Dockerfile.openfrontier
         - docker image ls 
         - docker run -d -p 8080:8080 -p 29418:29418 gerrit:local
-        # curl: (56) Recv failure: Connection reset by peer
-        # - curl  http://localhost:8080
       after_success:
         - deactivate
 
@@ -91,9 +87,6 @@ matrix:
         - docker image ls 
         # Use HTTP authentication type
         - docker run -d -p 8080:8080 -p 29418:29418 -e AUTH_TYPE=HTTP gerrit:local
-        # curl: (56) Recv failure: Connection reset by peer
-        # - curl  http://localhost:8080
-        # - curl -I "http://localhost:8080" 2>&1 | awk '/HTTP\// {print $2}' # see only the HTTP status code
         - sudo netstat -ntlp | awk '$4=="127.0.0.1:80"'
         # - wget -S --spider http://localhost:8080 #Only Header Information 
         - wget --spider -S "http://localhost:8080" 2>&1 | awk '/HTTP\// {print $2}' #see only the HTTP status code
@@ -120,9 +113,6 @@ matrix:
         - docker image ls 
         # Sync timezone with the host server.
         - docker run -d -p 8080:8080 -p 29418:29418 -v /etc/localtime:/etc/localtime:ro gerrit:local
-        # curl: (56) Recv failure: Connection reset by peer
-        # - curl  http://localhost:8080
-        # - curl -I "http://localhost:8080" 2>&1 | awk '/HTTP\// {print $2}' # see only the HTTP status code
         - sudo netstat -ntlp | awk '$4=="127.0.0.1:80"'
         # - wget -S --spider http://localhost:8080 #Only Header Information 
         - wget --spider -S "http://localhost:8080" 2>&1 | awk '/HTTP\// {print $2}' #see only the HTTP status code
@@ -149,9 +139,6 @@ matrix:
         - docker image ls 
         - docker run --name gerrit_local_volume gerrit:local echo "Gerrit volume container."
         - docker run -d --volumes-from gerrit_local_volume -p 8080:8080 -p 29418:29418 gerrit:local
-        # - docker run -d -p 8080:8080 -p 29418:29418 gerrit:local
-        # curl: (56) Recv failure: Connection reset by peer
-        # - curl  http://localhost:8080
       after_success:
         - deactivate
 
@@ -175,7 +162,5 @@ matrix:
         - docker volume create gerrit_local_volume
         # Initialize and start gerrit using the local directory
         - docker run -d -v gerrit_local_volume:/var/gerrit/review_site -p 8080:8080 -p 29418:29418 gerrit:local
-        # curl: (56) Recv failure: Connection reset by peer
-        # - curl  http://localhost:8080
       after_success:
         - deactivate
