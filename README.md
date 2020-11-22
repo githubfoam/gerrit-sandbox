@@ -1,6 +1,6 @@
 # gerrit-sandbox
 
-[![Build Status](https://travis-ci.com/githubfoam/gerrit-sandbox.svg?branch=dev)](https://travis-ci.com/githubfoam/gerrit-sandbox)  
+[![Build Status](https://travis-ci.com/githubfoam/gerrit-sandbox.svg?branch=main)](https://travis-ci.com/githubfoam/gerrit-sandbox)  
 
 ~~~~
 https://github.com/GerritCodeReview/gerrit
